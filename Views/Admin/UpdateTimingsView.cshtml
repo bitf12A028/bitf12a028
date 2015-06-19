@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "UpdateTimingsView";
+}
+
+@model EADProject.Models.Timing
+
+<html>
+<head>
+    <script src="~/Scripts/jqueryfile.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery-2.1.1.js"></script>
+    <link href="~/Contents/bootstrap.css" rel="stylesheet" />
+
+    <title>Update Train Timings</title>
+</head>
+
+
+
+<body>
+
+<form action="/Admin/SetUpdatedTimings" method="post">
+    
+<div class="container">
+<br /><br />
+  <h3>Update Train Timings....</h3><br /><br />
+  <div class="panel panel-default" style="width:600px ; margin-left:250px">
+    <div class="panel-body">
+        <br />
+
+          <label style="margin-top:10px">From</label>
+          <input type="text" class="form-control" required ="required" value="@Model.From" name="from"/>
+        
+          <label style="margin-top:5px">To</label>              
+          <input type="text" class="form-control" required ="required" value="@Model.To" name="to"/>
+          
+          <label style="margin-top:10px">Train Name</label>              
+          <input type="text" class="form-control" required ="required" value="@Model.TrainName" name="tname" />
+          
+          <label style="margin-top:5px">Departure</label>                    
+          <input type="text" class="form-control" required ="required" value="@Model.Departure" name="departure" />
+          
+          <label style="margin-top:10px">Arrival</label>                     
+          <input type="text" class="form-control" required ="required" value="@Model.Arrival" name="arrival"/>
+          
+          <label style="margin-top:10px">Duration</label>               
+          <input type="text" class="form-control" required ="required" value="@Model.Duration" name="duration" /><br />
+
+          <input type="submit" class="btn btn-success pull-right" style="width:150px" value="Update" id="button" />
+                
+
+    </div>
+  </div>
+</div>
+
+</form>
+
+
+</body>
+</html>

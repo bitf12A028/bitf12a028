@@ -1,0 +1,246 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model EADProject.Models.Reservation
+
+<br /><br />
+
+<form action="/Reservation/ReservationView" method="post">
+
+<div class="row">
+     
+        <div class="col-md-2">
+            <div class="list-group">
+                <a href="/Others/ReservationCriteriaView" class="list-group-item active" style="background-color:seagreen">Reservation Criteria</a>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+        </div>
+
+        <div class="col-md-7">
+            <label style="font-size:20px">Seats Availability</label>
+        </div>
+</div>
+
+
+<div class="row">       
+        <div class="col-md-2">
+            <div class="list-group">
+                <a href="/Others/RefundPolicyView" class="list-group-item active" style="background-color:seagreen">Refund Policy</a>
+            </div>
+        </div>
+
+       <div class="col-md-1">
+       </div>
+
+     <div class="col-md-2">
+         <label>Reservation Center : </label>
+     </div>
+
+
+
+    <div class="col-md-5">
+          <select  class="form-control" style="width:200px ; height:35px" id="City">
+              <option>Lahore</option>
+              <option>Karachi</option>  
+              <option>Faisalabad</option>
+              <option>Multan</option>
+              <option>Islamabad</option>
+              <option>Gujranwala</option>
+              <option>Gujrat</option>
+              <option>Quetta</option>
+              <option>Sahiwal</option>
+              <option>Sialkot</option>
+          </select>
+
+        <input type="text" name="ReservationCenter" id="ReservationCenter" style="visibility:hidden" />
+    </div>
+
+
+         <div class="col-md-2">
+            <div class="list-group">
+                <a href="/Others/BookingOfficesView" class="list-group-item active" style="background-color:seagreen">Manual Booking Offices</a>
+            </div>
+        </div>
+
+ </div> 
+
+<div class="row">       
+        <div class="col-md-2">
+            <div class="list-group">
+                <a href="/Others/SaloonView" class="list-group-item active" style="background-color:seagreen">Saloon</a>
+            </div>
+        </div>
+
+       <div class="col-md-1">
+       </div>
+
+     <div class="col-md-2">
+         <label>From : </label>
+     </div>
+
+
+    <div class="col-md-5">
+          <select  class="form-control" style="width:200px ; height:35px" id="from">
+              <option>Lahore</option>
+              <option>Karachi</option>  
+              <option>Faisalabad</option>
+              <option>Multan</option>
+              <option>Islamabad</option>
+              <option>Gujranwala</option>
+              <option>Gujrat</option>
+              <option>Quetta</option>
+              <option>Sahiwal</option>
+              <option>Sialkot</option>
+          </select>
+
+        <input type="text" name="From" id="From" style="visibility:hidden" />
+    </div>
+
+
+        <div class="col-md-2">
+            <div class="list-group">
+                <a href="/Reservation/CancelReservationView" class="list-group-item active" style="background-color:seagreen">Cancel Reservation</a>
+            </div>
+        </div>
+
+
+</div>
+
+ <div class="row">
+       
+        <div class="col-md-2">
+            <div class="list-group">
+                <a href="#" class="list-group-item active" style="background-color:seagreen">Classes</a>
+                <a href="#" class="list-group-item">Economy Class</a>
+                <a href="#" class="list-group-item">Business Class</a>
+                <a href="#" class="list-group-item">AC Parlour</a>
+                <a href="#" class="list-group-item">AC Sleeper</a>
+            </div>
+        </div>
+
+       <div class="col-md-1">
+       </div>
+
+     <div class="col-md-2">
+         <label>To : </label> <br /><br /><br />
+        <label>Departure Date : </label><br /><br /><br />
+         <label>Train Name : </label><br /><br /><br />
+
+         <label>Select your class : </label><br /><br /><br />
+         
+         <label>No. of tickets to reserve : </label><br /><br /><br /><br />
+         
+         <label>Enter your Username : </label><br /><br /><br />
+         
+         <label>Enter your Contact-No : </label>
+
+     </div>
+
+    <div class="col-md-5">
+          <select  class="form-control" style="width:200px ; height:35px" id="to">
+              <option>Lahore</option>
+              <option>Karachi</option>  
+              <option>Faisalabad</option>
+              <option>Multan</option>
+              <option>Islamabad</option>
+              <option>Gujranwala</option>
+              <option>Gujrat</option>
+              <option>Quetta</option>
+              <option>Sahiwal</option>
+              <option>Sialkot</option>
+          </select>
+
+        <input type="text" name="To" id="To" style="visibility:hidden" />
+
+         <input  required="required" class="form-control" type="text" name="DepartureDate" style="width:200px ; height:35px" value="@DateTime.Now.Date" />
+         <br />
+
+
+          <select  class="form-control" style="width:200px ; height:35px" id="Tname">
+              <option>Allama Iqbal Express</option>
+              <option>Chenab Express</option>
+              <option>Ghouri Express</option>
+              <option>Islamabad Express</option>
+              <option>Shalimar Express</option>
+          </select>
+
+         <input type="text" name="TrainName" id="TrainName" style="visibility:hidden" /><br />
+
+          <select  class="form-control" style="width:200px ; height:35px" id="class">
+              <option>Economy Class</option>
+              <option>Business Class</option>  
+              <option>Ac Parlour</option>
+              <option>Ac Sleeper</option>
+              <option>Saloon</option>
+              </select>
+
+         <input type="text" name="Class" id="Class" style="visibility:hidden"/>
+
+         <br />
+
+         <input type="text" class="form-control" , id="tickets" , name="NoOfTickets" style="width:200px ; height:35px" , placeholder="Tickets to reserve" , required="required" />
+         <br />
+         <label>No more than 20 reservations are allowed</label>
+
+         <br /><br />
+
+         @Html.TextBoxFor(x=>Model.Username, new { placeholder="Enter Username", @class="form-control" , style="width:200px ; height:35px" , required="required"})
+         <br />
+
+         @Html.TextBoxFor(x=>Model.ContactNo , new { @class="form-control" , style="width:200px ; height:35px" , placeholder="Contact Number" , required="required"} )
+                   <br /><br /><br />
+             <input type="submit" class="btn btn-success" style="height:35px" onclick="getData()" value="Submit Reservation"/>
+
+        <br />
+        @if(@ViewBag.x != null)
+        {
+        <p style="font-size:25px ; margin-left:-50px">@ViewBag.x</p>
+        }         
+
+
+    </div>
+
+          <div class="col-md-2">
+            <div class="list-group">
+                <a href="/Comment/CommentView" class="list-group-item active" style="background-color:seagreen">Comment</a>
+            </div>
+         </div>
+
+
+</div>
+
+
+
+
+<script>
+    function getData() {
+        var x = document.getElementById("ReservationCenter");
+        x.value = document.getElementById("City").value;
+        var y = document.getElementById("TrainName");
+        y.value = document.getElementById("Tname").value;
+        var z = document.getElementById("Class");
+        z.value = document.getElementById("class").value;
+        var a = document.getElementById("From");
+        a.value = document.getElementById("from").value;
+        var b = document.getElementById("To");
+        b.value = document.getElementById("to").value;
+
+        var u = document.getElementById("tickets").value;
+
+        if (u > 20) {
+            alert("Reservation failed (no more than 20 reservations are allowed)....!");
+        }
+
+
+    }
+</script>
+
+
+
+
+
+
+
+    </form>

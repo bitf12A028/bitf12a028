@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "AdminUsersView";
+}
+
+@model List<EADProject.Models.User>
+
+
+<html>
+<head>
+    <script src="~/Scripts/jqueryfile.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery-2.1.1.js"></script>
+    <link href="~/Contents/bootstrap.css" rel="stylesheet" />
+
+    <title>Signed in Users</title>
+
+
+</head>
+
+
+<body>
+
+
+    
+<div class="container">
+<br /><br />
+  <h2>List of Registered Users....</h2><br /><br />
+  <div class="panel panel-primary">
+    <div class="panel-body">
+                          <input type="text" style="visibility:hidden" id="t1"/>
+   
+        @foreach(var x in Model)
+        {
+              <div> 
+                  <div class="well">
+                       <label>Username : </label>@x.Username <br />
+                       <label>Password : </label>@x.Password <br />
+                       <label>Email : </label>@x.Email <br />
+                       <label>CNIC : </label>@x.CNIC          
+                  <input type="button" class="btn btn-danger pull-right" style="margin-top:-30px" value="Delete User" id="@x.Username" onclick="f(this.id)"/><br /><br />
+                  </div>
+                  <hr />
+
+              </div>
+        }
+    </div>
+  </div>
+</div>
+
+
+<script>
+    function f(id) {
+        $(document).ready(function () {
+            var name = document.getElementById("t1").value = id;
+
+            $.getJSON("/Admin/DeleteUser?name=" + name, function (data) {
+                if (data == true)
+                window.location.replace("AdminUsersView");
+            });
+        });
+
+    }
+</script>
+
+
+</body>
+</html>
+

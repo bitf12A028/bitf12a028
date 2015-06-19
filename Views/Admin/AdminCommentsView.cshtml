@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "AdminCommentsView";
+}
+
+@model List<EADProject.Models.Comment>
+
+
+<html>
+<head>
+    <script src="~/Scripts/jqueryfile.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery-2.1.1.js"></script>
+    <link href="~/Contents/bootstrap.css" rel="stylesheet" />
+
+    <title>Comments from clients</title>
+</head>
+
+
+
+<body>
+
+
+    
+<div class="container">
+<br /><br />
+  <h2>Comments by users...</h2><br /><br />
+  <div class="panel panel-primary">
+    <div class="panel-body">
+                          <input type="text" style="visibility:hidden" id="t1"/>
+        @foreach(var x in Model)
+        {
+              <div> 
+                  <label style="font-size:15px">Commented by : <label style="font-size:20px">@x.Name</label></label>
+                  <hr />
+                  <label>Comment : </label>
+                  <div class="well">@x.Comment1</div>
+
+                  <input type="button" class="btn btn-danger pull-right" value="Delete Comment" id="@x.Name" onclick="f(this.id)"/><br /><br />
+                  <hr />
+              </div>
+        }
+    </div>
+  </div>
+</div>
+
+
+<script>
+    function f(id) {
+        $(document).ready(function () {
+            var name = document.getElementById("t1").value = id;
+
+            $.getJSON("/Admin/DeleteComment?name=" + name, function (data) {
+                if (data == true)
+                    window.location.replace("AdminCommentsView");
+            });
+        });
+
+  
+    }
+</script>
+
+
+</body>
+</html>
+
+
+

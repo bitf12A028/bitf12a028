@@ -1,0 +1,175 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model List<EADProject.Models.Timing>
+
+    <script src="~/Scripts/jqueryfile.js"></script>
+<br /><br />
+
+
+<script>
+
+    $(document).ready(function () {
+        $("#button").click(function () {
+           var trainName = $("#mySelect").val();
+
+           $.getJSON('/Timings/GetTimingsList?tName=' + trainName, function (data) {
+
+               $("#table tr").remove();
+
+               for (var i = 0, l = data.length; i < l; i++) {
+
+                   if (i == 0) {
+                       $("#table").append("<tr style=\"height:40px\">"+ 
+                                               "<td style=\"background-color:seagreen ; width:120px ; padding:7px\">From</td>" +
+                                               "<td style=\"background-color:seagreen ; width:100px ; padding:7px\">To</td>" +
+                                               "<td style=\"background-color:seagreen ; width:250px ; padding:5px\">Train Name</td>" +
+                                               "<td style=\"background-color:seagreen ; width:160px ; padding:5px\">Departure</td>" +
+                                               "<td style=\"background-color:seagreen ; width:150px ; padding:5px\">Arrival</td>" +
+                                               "<td style=\"background-color:seagreen ; width:150px ; padding:5px\">Duration</td>" +
+                                               "</tr>");
+                   }
+
+                   $("#table").append("<tr> <td style=\"width:120px ; padding:7px\"> " + data[i].From + "</td>" +
+                                           "<td style=\"width:100px ; padding:7px\"> " + data[i].To + "</td>" +
+                                           "<td style=\"width:250px ; padding:5px\"> " + data[i].TrainName + "</td>" +
+                                           "<td style=\"width:160px ; padding:5px\"> " + data[i].Departure + "</td>" +
+                                           "<td style=\"width:150px ; padding:5px\"> " + data[i].Arrival + "</td>" +
+                                           "<td style=\"width:150px ; padding:5px\"> " + data[i].Duration + "</td>" +
+                                                              "</tr>");
+               }
+              
+
+           });
+
+            });
+        });
+
+</script>   
+
+
+
+<div class="row">
+     
+        <div class="col-md-2">
+            <div class="list-group">
+                <a href="/Others/ReservationCriteriaView" class="list-group-item active" style="background-color:seagreen">Reservation Criteria</a>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+        </div>
+
+        <div class="col-md-7">
+            <label style="font-size:20px">Train Timings</label>
+        </div>
+</div>
+
+
+<div class="row">       
+        <div class="col-md-2">
+            <div class="list-group">
+                <a href="/Others/RefundPolicyView" class="list-group-item active" style="background-color:seagreen">Refund Policy</a>
+            </div>
+        </div>
+
+    <div class="col-md-8">
+    </div>
+
+         <div class="col-md-2">
+            <div class="list-group">
+                <a href="/Others/BookingOfficesView" class="list-group-item active" style="background-color:seagreen">Manual Booking Offices</a>
+            </div>
+        </div>
+
+ </div> 
+
+<div class="row">       
+        <div class="col-md-2">
+            <div class="list-group">
+                <a href="/Others/SaloonView" class="list-group-item active" style="background-color:seagreen">Saloon</a>
+            </div>
+        </div>
+
+       <div class="col-md-2">
+       </div>
+
+     <div class="col-md-1">
+         <label>Train Name : </label>
+     </div>
+
+     <div class="col-md-5">
+          <select class="form-control" style="width:250px ; height:35px" id="mySelect">
+              <option onclick="f()">Allama Iqbal Express</option>
+              <option onclick="f()">Chenab Express</option>
+              <option onclick="f()">Ghouri Express</option>
+              <option onclick="f()">Islamabad Express</option>
+              <option onclick="f()">Shalimar Express</option>
+          </select>
+     </div>
+
+        <div class="col-md-2">
+            <div class="list-group">
+                <a href="/Reservation/CancelReservationView" class="list-group-item active" style="background-color:seagreen">Cancel Reservation</a>
+            </div>
+        </div>
+
+
+</div>
+
+ <div class="row">
+       
+        <div class="col-md-2">
+            <div class="list-group">
+                <a href="#" class="list-group-item active" style="background-color:seagreen">Classes</a>
+                <a href="#" class="list-group-item">Economy Class</a>
+                <a href="#" class="list-group-item">Business Class</a>
+                <a href="#" class="list-group-item">AC Parlour</a>
+                <a href="#" class="list-group-item">AC Sleeper</a>
+            </div>
+        </div>
+
+     <div class="col-md-2"></div>
+
+<div class="col-md-5" style="visibility:visible" id="tab_div">
+
+    <input type="text" name = "t1" id="t1" style="visibility:hidden"/>   <!-- Hidden Field --> 
+    <input type="button" class="btn btn-success" id="button" value="See Timings"/>  <br /><br /><br />
+
+    <table border="1" style="background-color:white ; margin-left:-60px ; margin-right:60px"  id="table">
+
+    </table>    
+
+</div>
+  
+     <div class="col-md-1"></div>
+
+     <div class="col-md-2">
+            <div class="list-group">
+                <a href="/Comment/CommentView" class="list-group-item active" style="background-color:seagreen">Comment</a>
+            </div>
+     </div>
+
+
+</div>
+
+ 
+ <div class="row">
+
+        <div class="col-md-2">
+
+        </div>
+
+     <div class="col-md-1">
+     </div>
+
+
+
+
+     <div class="col-md-3">
+     </div>
+
+</div>
+
+
+

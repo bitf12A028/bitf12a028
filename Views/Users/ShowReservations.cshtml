@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "ShowReservations";
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model List<EADProject.Models.Reservation>
+
+
+<html>
+<head>
+    <script src="~/Scripts/jqueryfile.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery-2.1.1.js"></script>
+    <link href="~/Contents/bootstrap.css" rel="stylesheet" />
+
+    <title>Reservations by @Session["username"]</title>
+</head>
+
+
+
+<body>
+
+
+    <br /><br /><br />
+
+<div class="container">
+<br /><br /><br />
+  <div class="panel panel-primary">
+    <div class="panel-body">
+        <label>Reservations by : @Session["username"]</label>
+        <br /><br /><br />
+    <table border="1" style="background-color:white ; margin-left:70px ; margin-right:60px"  id="table">
+          @foreach(var x in Model)
+           {
+            <tr style="margin-top:20px">
+                <td style="width:90px ; height:30px ; padding-left:5px ; margin-top:20px"> @x.ReservationCenter </td>
+                <td style="width:90px ; height:30px  ; padding-left:5px ; margin-top:20px"> @x.From </td>
+                <td style="width:100px ; height:30px  ; padding-left:5px ; margin-top:20px"> @x.To </td>
+                <td style="width:190px ; height:30px  ; padding-left:5px ; margin-top:20px"> @x.DepartureDate </td>
+                <td style="width:130px ; height:30px  ; padding-left:5px ; margin-top:20px"> @x.TrainName </td>
+                <td style="width:140px ; height:30px  ; padding-left:5px ; margin-top:20px"> @x.Class </td>
+                <td style="width:40px ; height:30px  ; padding-left:5px ; margin-top:20px"> @x.NoOfTickets </td>
+                <td style="width:60px ; height:30px  ; padding-left:5px ; margin-top:20px"> <input type="button" class="btn btn-danger" value="Delete" id="@x.Id" onclick="f(this.id)"/> </td>
+            </tr>
+            } 
+
+    </table>
+        <br /><br /><br />
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+    
+    function f(id) {
+        $.getJSON("/Users/DeleteReservation?id=" + id, function (data) {
+            if (data == true) {
+                alert("Reservations Deleted.....!");
+                window.location.replace("ShowReservations");
+            }
+                
+        });
+    }
+
+</script>
+
+
+</body>
+</html>
+
+
+
+

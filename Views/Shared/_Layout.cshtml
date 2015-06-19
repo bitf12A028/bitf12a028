@@ -1,0 +1,252 @@
+﻿@{
+    ViewBag.Title = "_Layout";
+}
+
+<html>
+<head>
+    <script src="~/Scripts/jqueryfile.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery-2.1.1.js"></script>
+    <link href="~/Contents/bootstrap.css" rel="stylesheet" />
+
+    <title>Pakistan Railway Reservation</title>
+
+
+  <style>
+  .carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 100%;
+      margin: auto;
+      height:450px;
+  }
+  </style>
+
+
+</head>
+
+
+<body style="background-color:wheat">
+
+<div class="row">
+
+  <nav class="navbar-inverse" style="background-color:black">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Pakistan Railway</a>
+    </div>
+    <div class="col-md-7">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/Home/Index">Home</a></li>
+        <li><a href="/Timings/TimingsView">Train Timings</a></li>
+        <li><a href="/Reservation/ReservationView">Reservation</a></li>
+        <li><a href="/Fares/FaresView">Fares</a></li>
+        <li><a href="/Others/AboutUsView">About us</a></li>
+        <li><a href="/Others/ContactView">Contact</a></li>
+        <li><a href="/Users/MyReservationsView">My Reservations</a></li>
+        <li><a href="/Users/MyCommentsView">My Comments</a></li>
+      </ul>
+
+    </div>
+
+      <div class="col-md-1">
+      <label style="color:white ; margin-left:130px ; padding-top:29px">@Session["username"]</label>
+      </div>
+
+@if (Session["username"] != null)
+{
+      <form action ="/Home/Logout" method = "post">
+          <div class="form-group ; col-md-1" style="margin-left:70px ; padding-top:23px">
+              <input type="submit" id="logout" class="btn btn-success" value="Log Out"/>
+          </div>
+      </form> 
+}
+else
+{
+   <!-- Trigger the modal with a button -->
+    
+    <div class="col-md-1" style="margin-left:60px ; padding-top:9px">
+     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Log In</button>
+    </div>
+    
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+      <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Login Form</h4>
+      </div>
+
+<div class="modal-body">
+<div class="row">
+<div class="col-md-4"></div>
+
+  
+    <div class="col-md-5">
+      <input type="text" class="form-control" , style="width:200px ; height:35px" , placeholder="Enter Username" , id="username" , required="required" onclick="hide1()" /> <br />
+      <input type="password" class="form-control" , style="width:200px ; height:35px" , placeholder="Enter Password" , id="password" , required="required" onclick="hide1()" /><br />    
+      <input type="button" class="btn btn-success" value="Login" style="width:80px ; margin-left:55px" id="loginbtn"/>
+    </div>
+    
+    <div class="col-md-3">
+            <p id="res" style="margin-left:-25px ; margin-top:20px ; color:red ; visibility:hidden">Invalid Username or Password...!</p>
+    </div>
+
+</div>
+</div> 
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+                   
+        </div>
+     </div>
+
+</div>
+           
+}
+
+    <div class="col-md-0" style="margin-left:20px ; padding-top:9px">
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal1">Register</button>
+    </div>
+    
+<!-- Modal -->
+<div id="myModal1" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+      <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Registeration Form</h4>
+      </div>
+
+<div class="modal-body">
+<div class="row">
+<div class="col-md-4"></div>
+
+  
+    <div class="col-md-5">
+      <input type="text" class="form-control" , style="width:200px ; height:35px" , placeholder="Enter Username" , id="uname" required="required" onclick="hide()"/><br />
+      <input type="password" class="form-control" , style="width:200px ; height:35px" , placeholder="Enter Password" , id="pass" , required="required" /><br />    
+      <input type="text" class="form-control" , style="width:200px ; height:35px" , placeholder="Enter Email" , id="email" , required="required" /> <br />
+      <input type="password" class="form-control" , style="width:200px ; height:35px" , placeholder="Enter CNIC" , id="cnic" , required="required" /><br />                 
+      <input type="button" class="btn btn-success" value="Register" style="width:80px ; margin-left:55px" id="registerbtn"/>
+    </div>
+        <div class="col-md-3">
+      <input type="button" class="btn btn-info" style="margin-left:-20px" value="Check" id="checkbtn"/><br />
+            <p id="result" style="margin-left:-25px ; margin-top:5px ; color:red ; visibility:hidden">Username already exists...!</p>
+        </div>
+
+
+</div>
+</div> 
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+                   
+        </div>
+     </div>
+
+</div>
+
+
+</div>
+</nav>
+
+            </div>
+
+
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Pakistan Railway Reservation</p>
+        </footer>
+
+
+
+
+<script>
+
+    function hide() {
+        document.getElementById("result").style.visibility = "hidden";
+    }
+    function hide1() {
+        document.getElementById("res").style.visibility = "hidden";
+    }
+
+    $(document).ready(function () {
+        $("#checkbtn").click(function () {
+            var uname = $("#uname").val();
+            if (uname == "" || uname == " ") {
+                alert("Please fill the Username field correctly..");
+            }
+            
+            $.getJSON("/Home/CheckUsernameExistance?uname=" + uname, function (result) {
+                if (result == true) {
+                    document.getElementById("result").style.visibility = "visible";
+                }
+            });
+        });
+    });
+
+
+        $("#registerbtn").click(function () {
+            var uname = $("#uname").val();
+            var pass = $("#pass").val();
+            var email = $("#email").val();
+            var cnic = $("#cnic").val();
+
+                $.getJSON("/Home/Register?uname=" + uname + '&pass=' + pass + '&email=' + email + '&cnic=' + cnic, function (result) {
+                    if (result == true) {
+                        alert("Username already exists..!");
+
+                    }
+                    else {
+                        alert("Successfully Added..!");
+                        window.location.replace("/Home/Index");
+                    }
+
+                });
+
+            
+        });
+
+
+
+
+            $("#loginbtn").click(function () {
+                var luname = $("#username").val();
+                var lpass = $("#password").val();
+              
+                $.getJSON("/Home/Login?UNAME=" + luname + '&PASS=' + lpass, function (res) {
+                    if (res == true) {
+                        if (luname == "umer" && lpass == "123abc") {
+                            window.location.replace("/Admin/DashboardView");
+                        }
+                    else {
+                        alert("Welcome...");
+                        window.location.replace("/Home/Index");
+                    }
+
+                    }
+                    else {
+                        document.getElementById("res").style.visibility = "visible";
+                    }
+
+                });
+
+
+            });
+
+
+
+</script>
+
+
+</body>
+</html>
+

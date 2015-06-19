@@ -1,0 +1,160 @@
+﻿@{
+    ViewBag.Title = "AdminTimingsView";
+}
+
+<html>
+    <head>
+    <script src="~/Scripts/jqueryfile.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery-2.1.1.js"></script>
+    <link href="~/Contents/bootstrap.css" rel="stylesheet" />
+
+    <title>Train Timings</title>
+    </head>
+
+<body>
+
+    <br /><br /><br />
+<div class="row">
+
+    <div class="col-md-4">
+    </div>
+
+    <div class="col-md-1">
+                  <br /><br /><br /><br />
+                  <label style="margin-top:10px">From : </label><br /><br />
+                  <label style="margin-top:10px">To : </label>
+    </div>
+
+    <div class="col-md-5">
+
+        <label style="font-size:25px">Select Category</label><br /><br /><br />
+
+          <select  class="form-control" style="width:200px ; height:35px" id="FromSelect">
+              <option>Lahore</option>
+              <option>Karachi</option>  
+              <option>Faisalabad</option>
+              <option>Multan</option>
+              <option>Islamabad</option>
+              <option>Gujranwala</option>
+              <option>Gujrat</option>
+              <option>Quetta</option>
+              <option>Sahiwal</option>
+              <option>Sialkot</option>
+          </select>
+<br />
+          <select  class="form-control" style="width:200px ; height:35px" id="ToSelect">
+              <option>Lahore</option>
+              <option>Karachi</option>  
+              <option>Faisalabad</option>
+              <option>Multan</option>
+              <option>Islamabad</option>
+              <option>Gujranwala</option>
+              <option>Gujrat</option>
+              <option>Quetta</option>
+              <option>Sahiwal</option>
+              <option>Sialkot</option>
+          </select>
+
+<br /><br />
+
+   </div>
+
+
+<div class="col-md-2"></div>
+
+</div>
+
+
+<div class="row" id="div_tab" style="visibility:hidden">
+<div class="container">
+<br /><br />
+  <div class="panel panel-primary">
+    <div class="panel-body">
+        <label style="font-size:25px">Update/Delete<br /></label><br /><br />
+
+        <div class="row">
+            <div class="col-md-1"></div>
+                     <table border="1" style="background-color:white ; margin-right:50px ; margin-right:60px"  id="table">
+                     </table>    
+            <br /><br />
+        </div>
+
+        </div> 
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<script>
+
+    $(document).ready(function () {
+        $("#ToSelect").change(function () {
+
+            var from = $("#FromSelect").val();
+            var to = $("#ToSelect").val();
+            document.getElementById("div_tab").style.visibility = "visible";
+
+            $.getJSON('/Admin/GetTimingsList?from=' + from + '&to=' + to, function (data) {
+
+                $("#table tr").remove();
+
+                for (var i = 0, l = data.length; i < l; i++) {
+
+                    $("#table").append("<tr>" +
+                                            "<td style=\"width:100px ; padding:5px\"> " + data[i].From + "</td>" +
+                                            "<td style=\"width:100px ; padding:5px\"> " + data[i].To + "</td>" +
+                                            "<td style=\"width:160px ; padding:10px\"> " + data[i].TrainName + "</td>" +
+                                            "<td style=\"width:100px ; padding:5px\"> " + data[i].Departure + "</td>" +
+                                            "<td style=\"width:70px ; padding:5px\"> " + data[i].Arrival + "</td>" +
+                                            "<td style=\"width:70px ; padding:5px\"> " + data[i].Duration + "</td>" +
+                                            "<td style=\"width:100px ; padding:5px\">  <input type=\"button\" class=\"btn btn-info\" value=\"Update\" id=\""+data[i].TrainName+"\" onclick=\"fu(this.id)\" style=\"width:100px\"> </td>" +
+                                            "<td style=\"width:100px ; padding:5px\">  <input type=\"button\" class=\"btn btn-danger\" value=\"Delete\" id=\""+data[i].TrainName+"\" onclick=\"fd(this.id)\" style=\"width:100px\"> </td>" +
+                                       "</tr>");
+                 
+                                            
+                }
+
+
+            });
+        });
+          
+    });
+
+
+    function fu(id) {
+        var trainName = id;
+        var from = document.getElementById("FromSelect").value;
+        var to = document.getElementById("ToSelect").value;
+  
+        window.location.replace('/Admin/UpdateTimingsView?tname='+trainName+'&from='+from+'&to='+to);
+
+    }
+
+
+    function fd(id) {
+        var trainName = id;
+        var from = document.getElementById("FromSelect").value;
+        var to = document.getElementById("ToSelect").value;
+        
+        $.getJSON('/Admin/DeleteTimings?tname=' + trainName + '&from=' + from + '&to=' + to, function (data) {
+            if (data == true) {
+                alert("Record Deleted....!");
+                window.location.replace("AdminTimingsView");
+            }
+        });
+    }
+    
+</script>
+
+
+</body>
+
+
+
+
+    </html>

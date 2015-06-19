@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "ShowComments";
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model List<EADProject.Models.Comment>
+
+
+<html>
+<head>
+    <script src="~/Scripts/jqueryfile.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery-2.1.1.js"></script>
+    <link href="~/Contents/bootstrap.css" rel="stylesheet" />
+
+    <title>Comments by @Session["username"]</title>
+</head>
+
+
+
+<body>
+
+
+    <br /><br /><br />
+
+<div class="container">
+<br /><br /><br />
+  <div class="panel panel-primary">
+    <div class="panel-body">
+        <label>Comments by : @Session["username"]</label>
+        <br /><br /><br />
+
+        @foreach(var x in Model)
+        {
+              <div>
+                  <div class="well">@x.Comment1</div>
+                  <hr />
+              </div>
+        }
+       
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
